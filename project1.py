@@ -1,5 +1,4 @@
-a = 2 + 2
+a = "hello world"
+
 print (a)
 
-b = 4 + 4
-print (b)
