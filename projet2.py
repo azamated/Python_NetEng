@@ -21,4 +21,5 @@ string1 = 'interface FastEthernet1/0'
 print (string1[10:])
 print (string1[-3:])
 a = "1234556790"
-print (a[::-1])
+print (a[::-2])
+
