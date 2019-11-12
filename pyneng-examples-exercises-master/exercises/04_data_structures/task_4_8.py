@@ -19,3 +19,16 @@
 '''
 
 ip = '192.168.3.1'
+ip_new = ip.split(".")
+oct1 = int(ip_new[0])
+oct2 = int(ip_new[1])
+oct3 = int(ip_new[2])
+oct4 = int(ip_new[3])
+
+ip_template = """
+
+{:<8} {:>8} {:<8} {:<8}
+{:08b} {:08b} {:08b} {:08b}"""
+print (ip_template.format(oct1, oct2, oct3, oct4, oct1, oct2, oct3, oct4))
+
+
