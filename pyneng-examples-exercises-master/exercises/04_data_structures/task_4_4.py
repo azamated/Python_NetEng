@@ -15,3 +15,4 @@
 vlans = [10, 20, 30, 1, 2, 100, 10, 30, 3, 4, 10]
 sorted_vlans = sorted(vlans)
 unique_vlans = set(sorted_vlans)
+print (unique_vlans)
