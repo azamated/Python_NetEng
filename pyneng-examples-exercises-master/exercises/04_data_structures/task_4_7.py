@@ -10,3 +10,10 @@
 '''
 
 mac = 'AAAA:BBBB:CCCC'
+parse = mac.split(":")
+binA = bin(int(parse[0], 16))
+binB = bin(int(parse[0], 16))
+binC = bin(int(parse[0], 16))
+
+result = str(binA) + str(binB) + str(binC)
+print(result)
