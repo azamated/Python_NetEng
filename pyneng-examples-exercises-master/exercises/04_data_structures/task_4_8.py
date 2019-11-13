@@ -27,7 +27,7 @@ oct4 = int(ip_new[3])
 
 ip_template = """
 
-{:<8} {:>8} {:<8} {:<8}
+{:<8} {:<8} {:<8} {:<8}
 {:08b} {:08b} {:08b} {:08b}"""
 print (ip_template.format(oct1, oct2, oct3, oct4, oct1, oct2, oct3, oct4))
 

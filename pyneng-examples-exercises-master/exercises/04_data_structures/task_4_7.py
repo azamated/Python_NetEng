@@ -16,4 +16,4 @@ binB = bin(int(parse[0], 16))
 binC = bin(int(parse[0], 16))
 
 result = str(binA) + str(binB) + str(binC)
-print(result)
+print(parse)
