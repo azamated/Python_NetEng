@@ -46,3 +46,6 @@ london_co = {
         'routing': True
     }
 }
+
+vlan = input('Enter VLAN number: ')
+print (vlan)
