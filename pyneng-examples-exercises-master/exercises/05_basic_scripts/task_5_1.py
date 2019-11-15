@@ -47,5 +47,5 @@ london_co = {
     }
 }
 
-vlan = input('Enter VLAN number: ')
-print (vlan)
+device_n = input('Введите имя устройства: ')
+print (london_co[device_n])
