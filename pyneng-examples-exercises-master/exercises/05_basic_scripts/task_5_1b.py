@@ -45,3 +45,15 @@ london_co = {
         'routing': True
     }
 }
+device_n = input('Введите имя устройства: ')
+#device_p = 
+
+
+list_items = list(london_co.items())
+list_keys = list_items[0].keys()
+
+print(list_items)
+#print(list_keys)
+
+#device_p = input('Введите имя параметра (ios, model, vendor, location, ip): ')
+#print (london_co[device_n][device_p])
