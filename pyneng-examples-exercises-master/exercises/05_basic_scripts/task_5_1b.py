@@ -46,14 +46,11 @@ london_co = {
     }
 }
 device_n = input('Введите имя устройства: ')
-#device_p = 
 
+list_values = list(london_co.values())
+list_keys = list(list_values[1].keys())
+device_raw = str(list_keys)
+device_raw2 = device_raw.strip("[]")
 
-list_items = list(london_co.items())
-list_keys = list_items[0].keys()
-
-print(list_items)
-#print(list_keys)
-
-#device_p = input('Введите имя параметра (ios, model, vendor, location, ip): ')
-#print (london_co[device_n][device_p])
+device_p = input('Введите имя параметра' + '(' + device_raw2 + ')' + ':')
+print (london_co[device_n][device_p])
