@@ -46,11 +46,7 @@ london_co = {
     }
 }
 device_n = input('Введите имя устройства: ')
-
-list_values = list(london_co.values())
-list_keys = list(list_values[1].keys())
-device_raw = str(list_keys)
-device_raw2 = device_raw.strip("[]")
-
-device_p = input('Введите имя параметра' + '(' + device_raw2 + ')' + ':')
+parameter = ",".join(london_co[device_n].keys())
+device_p = input('Введите имя параметра' + '(' + parameter + ')' + ':')
 print (london_co[device_n][device_p])
+
