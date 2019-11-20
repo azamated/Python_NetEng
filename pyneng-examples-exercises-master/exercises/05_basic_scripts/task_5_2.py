@@ -35,7 +35,6 @@ maskbit = "1" * maskint ## string multiplied by numbers returns multiple strings
 maskbit = "{:<032}".format(maskbit)
 
 m1 = int(maskbit[0:8], 2) ###воспринимай однерки как двоичное число, но одщее число десятичное, так как есть INT
-print (m1)
 m2 = int(maskbit[8:16], 2) 
 m3 = int(maskbit[16:24], 2) 
 m4 = int(maskbit[24:32], 2) 
