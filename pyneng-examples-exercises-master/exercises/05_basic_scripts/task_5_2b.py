@@ -11,6 +11,7 @@
 '''
 from sys import argv
 ip_param = argv[1]
+
 #ip_param= input("Please enter IP address with mask in the follwowing format: 10.1.1.0/24: ")
 ip_param_parsed = ip_param.split("/") 
 ip_add = ip_param_parsed[0].split(".")
