@@ -14,3 +14,29 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
+ip = input("Please enter IP address: ")
+ip_parsed = ip.split(".") 
+
+for oct in ip_parsed:
+	oct_int = int(oct)
+	if oct_int in range(224):
+		if oct_int == 0:
+			print (ip + " is unassigned")
+			break
+		break
+	break
+		else:
+			print (ip + " is unicast")
+			break
+		break
+	break
+
+"""
+oct1 = int(ip_parsed[i])
+if oct1 in range(224):
+	if ip_parsed[0] == 0:
+		print (ip + " is unassigned")
+	else:
+		print (ip + " is unicast")
+
+"""
