@@ -17,26 +17,39 @@
 ip = input("Please enter IP address: ")
 ip_parsed = ip.split(".") 
 
-for oct in ip_parsed:
-	oct_int = int(oct)
-	if oct_int in range(224):
-		if oct_int == 0:
-			print (ip + " is unassigned")
-			break
-		break
-	break
-		else:
-			print (ip + " is unicast")
-			break
-		break
-	break
 
-"""
-oct1 = int(ip_parsed[i])
-if oct1 in range(224):
-	if ip_parsed[0] == 0:
-		print (ip + " is unassigned")
+ip_range= {	
+			'A':[1, 127],
+			'B':[128, 191],	
+			'C':[192, 223],			
+			'D':[224, 239],
+		  '255':[255, 255],
+			'0':[0, 0],
+	       }
+	      
+ip_packet= {	
+			'A':'unicast',
+			'B':'unicast',			
+			'C':'unicast',			
+			'D':'multicast',
+		  '255':'local broadcast',
+			'0':'unassigned',
+		   None: "unused"
+	       }
+for item in ip_range:
+	if int(ip_range[item][0]) <= int(ip_parsed[0]) <= int(ip_range[item][1]):
+		network_class = item
+		break
 	else:
-		print (ip + " is unicast")
+		network_class = None
 
-"""
+for key, value in ip_packet.items():
+	if key== network_class:
+		print(value)
+
+
+
+
+
+
+
