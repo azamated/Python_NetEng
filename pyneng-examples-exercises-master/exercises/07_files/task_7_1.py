@@ -28,3 +28,4 @@ with open('ospf.txt') as f:
 		parse = line.split()
 		print(template.format(parse[0] + "SPF", parse[1], parse[2].strip("[]"), parse[4].strip(","), parse[5].strip(","), parse[6]))
 		
+
