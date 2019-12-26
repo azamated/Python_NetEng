@@ -22,3 +22,10 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 '''
+list = []
+with open('CAM_table.txt', 'r') as f: 
+	str_file = f.read().rstrip().split('\n')
+	for line in str_file :
+		if "." in line:
+
+			

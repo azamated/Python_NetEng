@@ -14,3 +14,16 @@
 '''
 
 ignore = ['duplex', 'alias', 'Current configuration']
+
+with open("config_sw1.txt", 'r') as f:
+	for line in f:
+		if ignore[0] in line:
+			pass
+		elif ignore[1] in line:
+			pass
+		elif ignore[2] in line:
+			pass
+		else:
+			output = open('config_sw1_cleared.txt', 'a')
+			output.write(line)
+			output.close()
