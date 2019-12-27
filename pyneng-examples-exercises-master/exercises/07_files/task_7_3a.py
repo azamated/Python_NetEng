@@ -22,10 +22,33 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 '''
-list = []
+template = '''
+{:<9}{:<20}{:<12}{:<6}
+'''
+
+list1 = []
 with open('CAM_table.txt', 'r') as f: 
 	str_file = f.read().rstrip().split('\n')
 	for line in str_file :
 		if "." in line:
+			list1.append(line)
+list2 = []
 
-			
+for item in list1:
+	list_parsed = item.split()
+	list_temp = [int(list_parsed[0]), list_parsed[1], list_parsed[2], list_parsed[3]]
+	list2.append(list_temp)
+	list2.sort()
+
+for item in list2:
+	print(template.format(item[0],item[1],item[2],item[3]), end='')
+
+
+		
+
+
+
+
+	
+
+          
