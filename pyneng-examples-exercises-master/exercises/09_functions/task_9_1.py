@@ -9,7 +9,12 @@
 - словарь с соответствием интерфейс-VLAN такого вида:
     {'FastEthernet0/12':10,
      'FastEthernet0/14':11,
-     'FastEthernet0/16':17}
+     'FastEthernet0/16':1
+     'FastEthernet0/17':21
+     'FastEthernet0/18':34
+     'FastEthernet0/19':56
+     'FastEthernet0/20':56
+     'FastEthernet0/12':17}
 - шаблон конфигурации access-портов в виде списка команд (список access_mode_template)
 
 Функция должна возвращать список всех портов в режиме access
@@ -51,18 +56,20 @@ access_mode_template = [
 access_config = {
     'FastEthernet0/12': 10,
     'FastEthernet0/14': 11,
-    'FastEthernet0/16': 17
+    'FastEthernet0/16': 17,
 }
 
-
 def generate_access_config(intf_vlan_mapping, access_template):
-    '''
-    intf_vlan_mapping - словарь с соответствием интерфейс-VLAN такого вида:
-        {'FastEthernet0/12':10,
-         'FastEthernet0/14':11,
-         'FastEthernet0/16':17}
-    access_template - список команд для порта в режиме access
-
-    Возвращает список всех портов в режиме access с конфигурацией на основе шаблона
-    '''
+	lists = []
+	for intf, vlan in intf_vlan_mapping.items():
+		lists.append('interface ' + intf)
+		for command in access_template:
+			if command.endswith('access vlan'):
+				lists.append('{} {}'.format(command, vlan))
+			else:
+				lists.append('{}'.format(command))
+	return lists	
+	
+print (generate_access_config(access_config, access_mode_template))
+			
 
