@@ -22,3 +22,18 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
 
+def get_int_vlan_map(config_filename):
+	intf = []
+	vlans = []
+	with open(config_filename) as f:
+		for line in f:
+			if line.startswith('interface'):
+				interface = line.rstrip().split('\n')
+				intf.append(line)
+			elif line.startswith(' switchport access vlan'):
+				vlan = line.rstrip().split('\n')
+				vlans.append(line)
+	
+	return intf, vlans
+				
+print(get_int_vlan_map('config_sw1.txt'))
