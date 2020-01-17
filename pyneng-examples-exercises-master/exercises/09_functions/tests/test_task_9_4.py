@@ -51,4 +51,3 @@ def test_function_return_value():
     assert return_value != None, "Функция ничего не возвращает"
     assert type(return_value) == dict, "Функция должна возвращать словарь"
     assert return_value == correct_return_value, "Функция возвращает неправильное значение"
-

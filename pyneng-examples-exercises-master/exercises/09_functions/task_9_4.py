@@ -20,8 +20,7 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
 
-ignore = ['duplex', 'alias', 'Current configuration']
-
+ignore = ['duplex', 'alias', 'Current configuration', '\n']
 
 def ignore_command(command, ignore):
     '''
@@ -35,3 +34,29 @@ def ignore_command(command, ignore):
     * False - если нет
     '''
     return any(word in command for word in ignore)
+
+
+def convert_config_to_dict(config_filename):
+	value_list = []
+	result = {}
+	with open(config_filename, 'r') as f:
+		f.seek(1)
+		str_file = f.read().rstrip().split('\n')
+		for line in str_file:
+			if line.startswith('!'):
+				continue
+			elif ignore_command(line, ignore):
+				continue
+			elif not line.startswith(' '):
+				key = line.strip()
+				result[key] = []
+				value_list = []
+			elif line.startswith(' '):
+				value = line.strip()
+				value_list.append(value)
+				result[key] = value_list
+		return result
+print (convert_config_to_dict('config_sw1.txt'))
+
+
+
