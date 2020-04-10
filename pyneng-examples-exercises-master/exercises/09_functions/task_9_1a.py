@@ -40,5 +40,25 @@ access_config = {
     'FastEthernet0/16': 17
 }
 
+def generate_access_config(intf_vlan_mapping, access_template, security_config='none'):
+	lists = []
+	for intf, vlan in intf_vlan_mapping.items():
+		lists.append('interface ' + intf)
+		for command in access_template:
+			if command.endswith('access vlan'):
+				lists.append('{} {}'.format(command, vlan))
+			else:
+				lists.append('{}'.format(command))
+		if security_config != 'none':
+			for command in security_config:
+				lists.append('{}'.format(command))
+	return lists	
+	
+#print (generate_access_config(access_config, access_mode_template))
+print (generate_access_config(access_config, access_mode_template, port_security_template))
+
+
+
+
 
 
