@@ -38,6 +38,6 @@ def get_int_vlan_map(config_filename):
                 for item in vlan_parsed:
                     item = int(item)
                     vlan_digits.append(item)
-                trunk_dic[interface] = vlan_digits
+                    trunk_dic[interface] = vlan_digits
         return access_dic, trunk_dic
 print (get_int_vlan_map('config_sw1.txt'))
