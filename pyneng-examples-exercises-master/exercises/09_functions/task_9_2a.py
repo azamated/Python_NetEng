@@ -39,7 +39,7 @@ def generate_trunk_config(intf_vlan_mapping, trunk_template):
 			else:
 				lists.append('{}'.format(command))
 				#print (lists)
-		dict['interface ' + intf]=lists
+		dict[intf]=lists
 	return dict
     
 print (generate_trunk_config(trunk_config, trunk_mode_template))
