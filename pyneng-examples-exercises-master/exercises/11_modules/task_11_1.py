@@ -33,10 +33,10 @@ def parse_cdp_neighbors(command_output):
 	output = command_output.split('\n')
 	final_dict = {}
 	for line in output:
-		if line.startswith('SW'):
+		if 'show cdp neighbors' in line:
 			line_parse = line.split('>')
 			deviceid = (line_parse[0])        #device as first element of tuple
-		elif line.startswith('R'):
+		elif 'Eth' in line:
 			temp_list_keys = []
 			temp_list_keys.append(deviceid)
 			temp_list_values = []
@@ -58,7 +58,8 @@ def parse_cdp_neighbors(command_output):
 
 with open('sh_cdp_n_sw1.txt') as file:
 	show = file.read()
-print (parse_cdp_neighbors(show))
+if __name__ == "__main__":
+	print (parse_cdp_neighbors(show))
 
 
 

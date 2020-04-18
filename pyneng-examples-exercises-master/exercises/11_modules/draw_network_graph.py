@@ -3,12 +3,12 @@
 
 import sys
 
-try:
+'''try:
     import graphviz as gv
 except ImportError:
     print("Module graphviz needs to be installed")
     print("pip install graphviz")
-    sys.exit()
+    sys.exit()'''
 
 styles = {
     'graph': {

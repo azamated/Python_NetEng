@@ -41,3 +41,30 @@ Cгенерировать топологию, которая соответст�
 
 '''
 
+from task_11_1 import parse_cdp_neighbors
+from draw_network_graph import draw_topology
+
+
+def create_network_map(filenames):
+	topology_dict_temp = {}
+	topology_dict = {}
+	key_list = []
+	value_list = []
+	for item in filenames:
+		with open(item) as file:
+			show = file.read()
+			temp_output = parse_cdp_neighbors(show)
+			topology_dict_temp.update(temp_output)
+			for key, value in topology_dict_temp.items():
+				key_list.append(key)
+				value_list.append(value)
+				if key in value_list and value in key_list:
+					pass
+				else:
+					topology_dict[key] = value
+	return topology_dict
+	draw_topology(topology_dict)
+ 
+filenames = ["sh_cdp_n_sw1.txt", "sh_cdp_n_r1.txt", "sh_cdp_n_r2.txt", "sh_cdp_n_r3.txt"]
+print (create_network_map(filenames))
+
