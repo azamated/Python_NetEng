@@ -23,3 +23,14 @@ Reachable    Unreachable
 
 Для этого задания нет тестов
 '''
+from tabulate import tabulate
+
+
+def print_ip_table(iptables):
+	colums = ['Reachable', 'Unreachable']
+	
+	
+
+
+print (print_ip_table((['8.8.4.4', '1.1.1.1', '1.1.1.2', '1.1.1.3'], ['172.21.41.128', '172.21.41.129', '172.21.41.130', '172.21.41.131', '172.21.41.132']))
+

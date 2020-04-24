@@ -33,16 +33,33 @@
 import subprocess
 
 def convert_ranges_to_ip_list(ips):
-	
-
+	new_ip_list = []
+	for item in ips:
+		if '-' in item:
+			iprange = item.split('-')
+			range_start = iprange[0].split('.')
+			if '.' not in iprange[1]:
+				range_end = iprange[1]
+				oct4_list = list(range(int(range_start[3]), int(range_end[0])+1))
+			else:
+				range_end = iprange[1].split('.')
+				oct4_list = list(range(int(range_start[3]), int(range_end[3])+1))
+			new_ip_string = str(range_start[0]) + '.' + str(range_start[1]) + '.' + str(range_start[2])
+			for item in oct4_list:
+				new_ip = new_ip_string + '.' + str(item)
+				new_ip_list.append(new_ip)
+		else:
+			new_ip_list.append(item)
+	return new_ip_list		
 
 
 def ping_ip_addresses(ip_addresses):
+	converted_ips = convert_ranges_to_ip_list(ip_addresses)
 	tuple_ip = ()
 	ok_ip = []
 	ko_ip = []
-	for item in ip_addresses:
-		result = subprocess.run(["ping", "-c", "3", "-n", item], stdout=subprocess.DEVNULL)
+	for item in converted_ips:
+		result = subprocess.run(["ping", "-c", "1", "-n", item], stdout=subprocess.DEVNULL)
 		if result.returncode == 0:
 			ok_ip.append(item)
 		else:
@@ -50,8 +67,7 @@ def ping_ip_addresses(ip_addresses):
 	tuple_ip = (ok_ip, ko_ip)
 	return tuple_ip
 
-print (ping_ip_addresses(['8.8.8.8', '1.1.1.1', '192.168.5.6', '4.4.4.4', '10.5.6.97']))
-
+print (ping_ip_addresses(['8.8.4.4', '1.1.1.1-3', '172.21.41.128-172.21.41.132']))
 
 
 
