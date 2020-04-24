@@ -32,6 +32,7 @@
 '''
 import subprocess
 
+
 def convert_ranges_to_ip_list(ips):
 	new_ip_list = []
 	for item in ips:
