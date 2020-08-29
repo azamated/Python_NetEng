@@ -35,20 +35,16 @@ def get_ip_from_cfg(input_data):
 
 	with open(input_data) as f:
 		for line in f:
-			if line.startswith('interface'):
-				ipmac_list = []
-				match1 =  re.search('interface (?P<intf>\S+)', line)				 
+				match1 =  re.search('interface (?P<intf>\S+)', line)
+				match2 = re.search(r' ip address (?P<ipaddr>\d+\.\d+\.\d+\.\d+)\s(?P<mask>\d+\.\d+\.\d+\.\d+)',line)				 
+				
 				if  match1:
+					ipmac_list = []
 					interface = match1.group('intf')
-					
-			elif line.startswith(' ip address'):
-				match2 = re.search(r' ip address (?P<ipaddr>\d+\.\d+\.\d+\.\d+)\s(?P<mask>\d+\.\d+\.\d+\.\d+)',line)
 				if match2:
 					ipmac_list.append(match2.group('ipaddr', 'mask'))
-
-				result[interface] = ipmac_list
+					result[interface] = ipmac_list
 				
-					
 	return result 
 				
 				

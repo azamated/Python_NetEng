@@ -33,22 +33,15 @@ def get_ip_from_cfg(input_data):
 
 	with open(input_data) as f:
 		for line in f:
-			if line.startswith('interface'):
 				match1 =  re.search('interface (?P<intf>\S+)', line)				 
 				if  match1:
 					interface = match1.group('intf')
-					#print (interface)
-			elif line.startswith(' ip address'):
+
 				match2 = re.search(' ip address (?P<ipaddr>\d+\.\d+\.\d+\.\d+)\s(?P<mask>\d+\.\d+\.\d+\.\d+)',line)
 				if match2:
-					ip = match2.group('ipaddr')
-					mask = match2.group('mask')
-					result[interface] = ip, mask
-					
+					result[interface] = match2.group('ipaddr', 'mask')
 	return result 
 				
-				
-	
 pprint (get_ip_from_cfg('config_r1.txt'))
 
 
