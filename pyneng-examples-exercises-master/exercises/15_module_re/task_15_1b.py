@@ -31,7 +31,8 @@ from pprint import pprint
 
 def get_ip_from_cfg(input_data):
 	result = {}
-	ipmac_list = []
+	ip_mask_list = []
+	interface = ''
 
 	with open(input_data) as f:
 		for line in f:
@@ -39,11 +40,14 @@ def get_ip_from_cfg(input_data):
 				match2 = re.search(r' ip address (?P<ipaddr>\d+\.\d+\.\d+\.\d+)\s(?P<mask>\d+\.\d+\.\d+\.\d+)',line)				 
 				
 				if  match1:
-					ipmac_list = []
+					if interface and ip_mask_list:
+						result.update({interface:ip_mask_list})
+					ip_mask_list = []
 					interface = match1.group('intf')
+
 				if match2:
-					ipmac_list.append(match2.group('ipaddr', 'mask'))
-					result[interface] = ipmac_list
+					ip_mask_list.append(match2.group('ipaddr', 'mask'))
+					
 				
 	return result 
 				
