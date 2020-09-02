@@ -27,8 +27,8 @@ result = []
 
 def parse_sh_ip_int_br(input_file):
 	with open (input_file) as f:
-		read_input = f.read()
-		parser = re.finditer(r'(\S+) +([\d+.]+|unassigned) +\w+ +\w+ +(up|down|administratively down) +(up|down)', read_input)
+		#read_input = f.read()
+		parser = re.finditer(r'(\S+) +([\d+.]+|unassigned) +\w+ +\w+ +(up|down|administratively down) +(up|down)', f.read())
 		for match in parser:
 				result.append(match.groups())
 		return result
