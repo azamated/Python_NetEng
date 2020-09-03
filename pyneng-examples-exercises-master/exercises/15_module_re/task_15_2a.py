@@ -26,4 +26,25 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
 
-headers = ['interface', 'address', 'status', 'protocol']
+
+import re
+from task_15_2 import parse_sh_ip_int_br
+from pprint import pprint
+
+result_list = []
+
+def convert_to_dict(dict_headers, dict_values):
+	for i in dict_values:
+		result_dict = {}
+		result_dict.update(dict(zip(dict_headers,i)))
+		result_list.append(result_dict)
+	return(result_list)
+
+
+if __name__ == '__main__':
+	headers = ['interface', 'address', 'status', 'protocol']
+	parsed_config = parse_sh_ip_int_br('sh_ip_int_br.txt')
+	pprint (convert_to_dict(headers, parsed_config))
+	
+	
+	
