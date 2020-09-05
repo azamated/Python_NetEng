@@ -36,7 +36,7 @@ def get_ints_without_description(input_data):
 				int_with_desc.append(match1.group(1))
 			elif match2:
 				int_with_desc.pop()
-		return int_with_desc
+		return (int_with_desc)
 		
 print (get_ints_without_description('config_r1.txt'))
 

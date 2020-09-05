@@ -24,3 +24,20 @@ description Connected to SW1 port Eth 0/1
 
 Проверить работу функции на файле sh_cdp_n_sw1.txt.
 '''
+
+import re
+from pprint import pprint
+
+result_dict = {}
+
+def generate_description_from_cdp(input_file):
+	with open (input_file) as f:
+		for line in f.read().split('\n'):
+			match = re.search(r'(\S+) +(\w+ \d\/\d) +\d+ +.* (\w+ \d\/\d$)', line)
+			if match:
+				description = 'description Connected to ' + match.group(1) + ' port ' + match.group(3)
+				result_dict[match.group(2)] = description
+		return result_dict
+		
+pprint (generate_description_from_cdp('sh_cdp_n_sw1.txt'))		
+		
