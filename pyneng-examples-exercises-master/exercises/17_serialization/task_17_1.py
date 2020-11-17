@@ -40,8 +40,29 @@
 '''
 
 import glob
+import csv
+import re
+
 
 sh_version_files = glob.glob('sh_vers*')
-#print(sh_version_files)
-
 headers = ['hostname', 'ios', 'image', 'uptime']
+
+
+def parse_sh_version(input_data):
+	result = ()
+	match =  re.search(r'^Cisco IOS Software.*Version (?P<ios>\S+),.*router uptime is (?P<uptime>\S+ \S+, \S+ \S+, \S+ \S+).*System image file is \"(?P<image>\S+)\"', input_data)
+	if match:
+		result = (match.group('ios'), match.group('image'), match.group('uptime'))
+		print (match.group('ios'))
+		print (match.group('image'))
+		print (match.group('uptime'))
+#		print (result)
+
+for item in sh_version_files:
+	with open(item, encoding='utf-8') as f:
+		parse_sh_version(f.read())
+
+
+
+
+
