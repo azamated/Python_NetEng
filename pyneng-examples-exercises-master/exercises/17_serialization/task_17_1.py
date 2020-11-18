@@ -46,41 +46,41 @@ import re
 
 sh_version_files = glob.glob('sh_vers*')
 headers = ['hostname', 'ios', 'image', 'uptime']
+list_final = []
 
 #Function parses files and returns a tuple woth matched results
 def parse_sh_version(input_data):
 	result = ()
-	match =  re.search(r'^Cisco IOS Software.*Version (?P<ios>\S+),.*router uptime is (?P<uptime>\S+ \S+, \S+ \S+, \S+ \S+).*System image file is \"(?P<image>\S+)\"', input_data)
+	match =  re.search('^Cisco IOS Software, .*Version (?P<ios>\S+),.*router uptime is (?P<uptime>\S+ days, \S+ hours, \S+ minutes).*System image file is \"(?P<image>\S+)\"', input_data)
 	if match:
 		result = (match.group('ios'), match.group('image'), match.group('uptime'))
-		return result
-#Funtion createa a csv file
+	return result
+
+#Funtion creates a csv file
 def write_inventory_to_csv(data_filenames, csv_filename):
-	with open(csv_filename, 'w') as f:
-		writer = csv.write(headers)
-		for name in data_filenames:
-			for item in result:
-				name.append(item)
-	writer = csv.writer(name)
-
-#Prepare input data to be parsed and 
-
-#Parse device names
-def parse_device_name(device_names):
+	list_final.append(headers)
 	names = []
-	for item in device_names:
-		match = re.search(r'sh_version_(\S+)\.', item)
-	if match:
-		names.append(match.group(1))
-	return names
-	
-	
-with open(item, encoding='utf-8') as f:
-	parse_sh_version(f.read().replace('\n', ''))
-parse_device_name(sh_version_files)
-write_inventory_to_csv(names, 'routers_inventory.csv')
+	list_temp = []
+	with open(csv_filename, 'w') as f:
+		writer = csv.writer(f)
+		for item in sh_version_files:
+			with open(item, encoding='utf-8') as f:
+				result = parse_sh_version(f.read().replace('\n', ''))
+			match = re.search(r'sh_version_(\S+)\.', item)
+			if match:
+				list_temp.append(match.group(1))
+				
+			for item in result:
+				list_temp.append(item)
+				
+			list_final.append(list_temp)
+			names = []
+			result = []
+			list_temp = []
+		for row in list_final:
+			writer.writerow(row)
 
-	
+write_inventory_to_csv(sh_version_files, 'routers_inventory.csv')
 
 
 
