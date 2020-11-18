@@ -47,22 +47,44 @@ import re
 sh_version_files = glob.glob('sh_vers*')
 headers = ['hostname', 'ios', 'image', 'uptime']
 
-
+#Function parses files and returns a tuple woth matched results
 def parse_sh_version(input_data):
 	result = ()
 	match =  re.search(r'^Cisco IOS Software.*Version (?P<ios>\S+),.*router uptime is (?P<uptime>\S+ \S+, \S+ \S+, \S+ \S+).*System image file is \"(?P<image>\S+)\"', input_data)
 	if match:
 		result = (match.group('ios'), match.group('image'), match.group('uptime'))
-		print (match.group('ios'))
-		print (match.group('image'))
-		print (match.group('uptime'))
-#		print (result)
+		return result
+#Funtion createa a csv file
+def write_inventory_to_csv(data_filenames, csv_filename):
+	with open(csv_filename, 'w') as f:
+		writer = csv.write(headers)
+		for name in data_filenames:
+			for item in result:
+				name.append(item)
+	writer = csv.writer(name)
 
-for item in sh_version_files:
-	with open(item, encoding='utf-8') as f:
-		parse_sh_version(f.read())
+#Prepare input data to be parsed and 
+
+#Parse device names
+def parse_device_name(device_names):
+	names = []
+	for item in device_names:
+		match = re.search(r'sh_version_(\S+)\.', item)
+	if match:
+		names.append(match.group(1))
+	return names
+	
+	
+with open(item, encoding='utf-8') as f:
+	parse_sh_version(f.read().replace('\n', ''))
+parse_device_name(sh_version_files)
+write_inventory_to_csv(names, 'routers_inventory.csv')
+
+	
 
 
+
+	
 
 
 
