@@ -21,9 +21,9 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 Интерфейсы должны быть записаны с пробелом. То есть, так Fa 0/0, а не так Fa0/0.
 
-
 Проверить работу функции на содержимом файла sh_cdp_n_sw1.txt
 '''
+
 import re
 import csv
 
@@ -31,8 +31,6 @@ import csv
 def parse_sh_cdp_neighbors(data_string):
 	#match hostname of the device
 	match1 = re.search(r'^(?P<hostname>\S+)>show', data_string)
-	if match1:
-		device_hostname = match1.group('hostname')
 	
 	#separate non-valuable data
 	parsed_data = data_string.split('Port ID')[1]
@@ -48,9 +46,9 @@ def parse_sh_cdp_neighbors(data_string):
 			#Append value to temp and final dictionaries
 			temp_dict1[match2.group('deviceId')] = match2.group('portId')
 			temp_dict2[match2.group('localInt')] = temp_dict1
-			final_dict[device_hostname] = temp_dict2
+			final_dict[match1.group('hostname')] = temp_dict2
 	return final_dict
 	
-with open('sh_cdp_n_sw1.txt') as f:
+with open('sh_cdp_n_r4.txt') as f:
 	data = f.read().replace('\n', '')
 	print(parse_sh_cdp_neighbors(data))
