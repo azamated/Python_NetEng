@@ -72,13 +72,13 @@ def write_inventory_to_csv(data_filenames, csv_filename):
 				
 			for item in result:
 				list_temp.append(item)
-				
 			list_final.append(list_temp)
 			names = []
 			result = []
 			list_temp = []
 		for row in list_final:
 			writer.writerow(row)
+	return None
 
 write_inventory_to_csv(sh_version_files, 'routers_inventory.csv')
 
