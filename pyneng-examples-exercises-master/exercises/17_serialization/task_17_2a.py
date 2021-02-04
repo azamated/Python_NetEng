@@ -32,3 +32,15 @@
 Проверить работу параметра save_to_filename и записать итоговый словарь в файл topology.yaml.
 
 '''
+
+def generate_topology_from_cdp(fileList, fileSave):
+	
+	
+	
+	
+	return final_dict
+
+list_of_files = ('sh_cdp_n_sw1.txt', 'sh_cdp_n_r1.txt', 'sh_cdp_n_r2.txt', 'sh_cdp_n_r3.txt', 'sh_cdp_n_r4.txt', 'sh_cdp_n_r5.txt', 'sh_cdp_n_r6.txt')
+save_to_filename = 'topology.yaml'
+print (generate_topology_from_cdp(list_of_files, save_to_filename))
+

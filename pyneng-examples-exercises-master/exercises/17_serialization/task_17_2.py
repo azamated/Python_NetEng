@@ -27,6 +27,7 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 import re
 import csv
 
+
 #main function
 def parse_sh_cdp_neighbors(data_string):
 	#match hostname of the device
@@ -49,6 +50,6 @@ def parse_sh_cdp_neighbors(data_string):
 			final_dict[match1.group('hostname')] = temp_dict2
 	return final_dict
 	
-with open('sh_cdp_n_r4.txt') as f:
+with open('sh_cdp_n_sw1.txt') as f:
 	data = f.read().replace('\n', '')
 	print(parse_sh_cdp_neighbors(data))
