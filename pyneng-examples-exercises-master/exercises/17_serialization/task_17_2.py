@@ -35,21 +35,26 @@ def parse_sh_cdp_neighbors(data_string):
 	
 	#separate non-valuable data
 	parsed_data = data_string.split('Port ID')[1]
-	matched_data  = re.findall(r'(\S+\s+\S+ \d\/\d\s+\S+\s+\S \S \S\s+\S+\s+\S+ \d\/\d)', parsed_data)
-		
+	#print (parsed_data)
+	matched_data  = re.findall(r'(\S+\s+\S+ \d\/\d\s+\S+\s+[\S ] \S \S\s+\S+\s+\S+ \d\/\d)', parsed_data)
+	#print (matched_data)		
+	
 	#convert data to dictionary
 	final_dict= {}
 	temp_dict2 = {}
 	for item in matched_data:
+		#print (item)
 		temp_dict1 = {}
-		match2 = re.search(r'(?P<deviceId>^\S+)\s+(?P<localInt>\S+ \d+/\d+)\s+\S+\s+\S \S \S\s+\S+\s+(?P<portId>\S+ \d+/\d+)', item)
+		match2 = re.search(r'(?P<deviceId>[SR]\S+)\s+(?P<localInt>\S+ \d+/\d+)\s+\S+\s+[\S ] \S \S\s+\S+\s+(?P<portId>\S+ \d+/\d+)', item)
 		if match2:
 			#Append value to temp and final dictionaries
+			#print(match2.group('deviceId'))
 			temp_dict1[match2.group('deviceId')] = match2.group('portId')
 			temp_dict2[match2.group('localInt')] = temp_dict1
 			final_dict[match1.group('hostname')] = temp_dict2
 	return final_dict
-	
-with open('sh_cdp_n_sw1.txt') as f:
-	data = f.read().replace('\n', '')
-	print(parse_sh_cdp_neighbors(data))
+
+if __name__ == "__main__":
+	with open('sh_cdp_n_r2.txt') as f:
+		data = f.read().replace('\n', '')
+		print(parse_sh_cdp_neighbors(data))

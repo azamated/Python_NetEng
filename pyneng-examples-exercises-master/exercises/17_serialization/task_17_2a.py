@@ -33,14 +33,21 @@
 
 '''
 
-def generate_topology_from_cdp(fileList, fileSave):
-	
-	
-	
-	
-	return final_dict
+from task_17_2 import parse_sh_cdp_neighbors
+
+def generate_topology_from_cdp(fileList):#, fileSave):
+	for item in fileList:
+		with open(item) as f:
+			data = f.read().replace('\n', '')
+			print (parse_sh_cdp_neighbors(data))
+		
+	#return final_dict
 
 list_of_files = ('sh_cdp_n_sw1.txt', 'sh_cdp_n_r1.txt', 'sh_cdp_n_r2.txt', 'sh_cdp_n_r3.txt', 'sh_cdp_n_r4.txt', 'sh_cdp_n_r5.txt', 'sh_cdp_n_r6.txt')
 save_to_filename = 'topology.yaml'
-print (generate_topology_from_cdp(list_of_files, save_to_filename))
+
+if __name__ == "__main__":
+	print (generate_topology_from_cdp(list_of_files))#, save_to_filename))
+	
+	
 
