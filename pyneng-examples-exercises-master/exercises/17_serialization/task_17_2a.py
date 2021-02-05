@@ -32,22 +32,33 @@
 Проверить работу параметра save_to_filename и записать итоговый словарь в файл topology.yaml.
 
 '''
-
+from pprint import pprint
+import yaml
 from task_17_2 import parse_sh_cdp_neighbors
 
-def generate_topology_from_cdp(fileList):#, fileSave):
-	for item in fileList:
+final_dict = {}
+
+def generate_topology_from_cdp(list_of_files, save_to_filename = None):
+	for item in list_of_files:
 		with open(item) as f:
 			data = f.read().replace('\n', '')
-			print (parse_sh_cdp_neighbors(data))
-		
-	#return final_dict
-
-list_of_files = ('sh_cdp_n_sw1.txt', 'sh_cdp_n_r1.txt', 'sh_cdp_n_r2.txt', 'sh_cdp_n_r3.txt', 'sh_cdp_n_r4.txt', 'sh_cdp_n_r5.txt', 'sh_cdp_n_r6.txt')
-save_to_filename = 'topology.yaml'
+			temp_dict = parse_sh_cdp_neighbors(data)
+			for key in temp_dict:
+				final_dict[key] = temp_dict[key]
+	if save_to_filename != None:
+		with open(save_to_filename, "w+") as f:
+			f = yaml.dump(final_dict, f)
+		return
+	else:
+		return final_dict
 
 if __name__ == "__main__":
-	print (generate_topology_from_cdp(list_of_files))#, save_to_filename))
+	fileList = ('sh_cdp_n_sw1.txt', 'sh_cdp_n_r1.txt', 'sh_cdp_n_r2.txt', 'sh_cdp_n_r3.txt', 'sh_cdp_n_r4.txt', 'sh_cdp_n_r5.txt', 'sh_cdp_n_r6.txt')
+	fileSave = input("Enter a name of the output yaml file or hit enter to pass: ")
 	
+	if len(fileSave) == 0:
+		pprint (generate_topology_from_cdp(fileList))
+	else:
+		pprint (generate_topology_from_cdp(fileList, fileSave))
 	
 

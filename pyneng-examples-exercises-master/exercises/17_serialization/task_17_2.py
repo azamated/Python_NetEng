@@ -55,6 +55,6 @@ def parse_sh_cdp_neighbors(data_string):
 	return final_dict
 
 if __name__ == "__main__":
-	with open('sh_cdp_n_r2.txt') as f:
+	with open('sh_cdp_n_sw1.txt') as f:
 		data = f.read().replace('\n', '')
 		print(parse_sh_cdp_neighbors(data))
