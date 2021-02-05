@@ -41,6 +41,7 @@ final_dict = {}
 tuple_key = ()
 tuple_value = ()
 
+#Funtions transforms a yaml file to graphic diagram
 def transform_topology(inputYamlFile):
 	with open(inputYamlFile) as f:
 		dict_topology = yaml.safe_load(f)
