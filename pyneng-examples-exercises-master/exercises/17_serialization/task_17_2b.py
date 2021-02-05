@@ -32,7 +32,6 @@
 
 '''
 
-
 from pprint import pprint
 import yaml
 from draw_network_graph import draw_topology
@@ -41,7 +40,6 @@ dict_topology = {}
 final_dict = {}
 tuple_key = ()
 tuple_value = ()
-
 
 def transform_topology(inputYamlFile):
 	with open(inputYamlFile) as f:
@@ -57,16 +55,19 @@ def transform_topology(inputYamlFile):
 				
 				for sub_key2, sub_value2 in sub_value1.items():
 					tuple_value = (sub_key2, sub_value2)
-					#print (tuple_key, tuple_value)
-					final_dict[tuple_key] = tuple_value
-	
-	pprint (final_dict)
-	#draw_topology(final_dict)
+					
+					if tuple_key not in final_dict.values():
+						#print (tuple_value)
+						final_dict[tuple_key] = tuple_value
+	 
+	#pprint (final_dict)
+	draw_topology(final_dict)
+	return final_dict
 
 if __name__ == "__main__":
 	input_yaml_file = 'topology.yaml'
 	transform_topology(input_yaml_file)
 	
 	
-
 	
+		
