@@ -3,7 +3,7 @@ import sqlite3
 import os
 import sys
 
-#Creating DB function
+#Creating DB 
 def create_db(db_name):
 	if os.path.isfile(db_name):
 		print ("DB is alredy created")		
@@ -21,7 +21,7 @@ def create_db(db_name):
 				conn.close()
 		print ("DONE!!!")
 
-#Create tables function
+#Creating tables 
 def create_tables(db_name, tables_schema):
 	with open(tables_schema) as f:
 		conn = sqlite3.connect(db_name)

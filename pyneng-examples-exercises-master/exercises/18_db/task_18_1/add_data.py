@@ -7,29 +7,16 @@ from pprint import pprint
 import yaml
 import re
 
+#Declaring global variables
 dhcp_snooping_file_list = []
 yaml_dict = {}
 parsed_result = []
 equipment_name = []
 
-#Checking if DB exists
-def check_db(db_name):
-	if os.path.isfile(db_name):
-		print ("DB is created")
-		db_flag = True
-	else:
-		print ("Please create a DB first!")
-	
-	return True
-	
-#Find dhcp snooping files 
-def dhcp_snooping_files():
-	for item in os.listdir():
-		if item.endswith('dhcp_snooping.txt'):
-			dhcp_snooping_file_list.append(item)
-	return dhcp_snooping_file_list
+################################
+###Add data to switches table#
+################################
 
-#Add data from switches 
 def add_data_switches(db_name, sw_file):
 	temp_dict1 = yaml_converter(sw_file)
 	for key, value in temp_dict1.items():
@@ -51,8 +38,16 @@ def add_data_switches(db_name, sw_file):
 			print ("Data already inserted")
 	conn.close()
 
+#Yaml converter
+def yaml_converter(file_input):
+	with open(file_input, 'r', encoding='UTF-8') as f:
+		yaml_dict = yaml.safe_load(f)
+	return yaml_dict
 
-#Add data for dhcp 
+################################
+###Add data to dhcp table#
+################################
+
 def add_data_dhcp(db_name, dhcp_files_list):
 	for item in dhcp_files_list:
 		row_data = txt_parser(item)
@@ -71,13 +66,15 @@ def add_data_dhcp(db_name, dhcp_files_list):
 				print ("Data already inserted")
 		conn.close()
 
-#Yaml converter
-def yaml_converter(file_input):
-	with open(file_input, 'r', encoding='UTF-8') as f:
-		yaml_dict = yaml.safe_load(f)
-	return yaml_dict
+#Find dhcp snooping files 
+def dhcp_snooping_files():
+	for item in os.listdir():
+		if item.endswith('dhcp_snooping.txt'):
+			dhcp_snooping_file_list.append(item)
+	return dhcp_snooping_file_list
 
-#Txt Parser
+
+#Txt Parser, parses in to list of tuples
 def txt_parser(input_data):
 	parsed_result = []
 	match1 = re.search(r'^(\S+)_dhcp', input_data)
@@ -94,12 +91,26 @@ def txt_parser(input_data):
 			#print (parsed_result)
 			return parsed_result
 
+###########
+#Main code#
+###########
+
 if __name__ == '__main__':
 	if check_db(r"dhcp_snooping.db") == True:
 		add_data_switches('dhcp_snooping.db','switches.yml')
 		dhcp_snooping_files()
 		add_data_dhcp('dhcp_snooping.db', dhcp_snooping_file_list)
-	
+	else:
+		print ("Please create a DB first!")
+
+#Checking if DB exists
+def check_db(db_name):
+	if os.path.isfile(db_name):
+		print ("DB is created")
+		db_flag = True
+		return True
+	else:
+		return False	
 	
 	
 	
