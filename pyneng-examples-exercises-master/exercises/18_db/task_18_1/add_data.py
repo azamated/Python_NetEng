@@ -44,9 +44,9 @@ def yaml_converter(file_input):
 		yaml_dict = yaml.safe_load(f)
 	return yaml_dict
 
-################################
+############################
 ###Add data to dhcp table#
-################################
+############################
 
 def add_data_dhcp(db_name, dhcp_files_list):
 	for item in dhcp_files_list:
@@ -94,6 +94,15 @@ def txt_parser(input_data):
 ###########
 #Main code#
 ###########
+#Checking if DB exists
+def check_db(db_name):
+	if os.path.isfile(db_name):
+		print ("DB is created")
+		db_flag = True
+		return True
+	else:
+		return False	
+
 
 if __name__ == '__main__':
 	if check_db(r"dhcp_snooping.db") == True:
@@ -103,15 +112,7 @@ if __name__ == '__main__':
 	else:
 		print ("Please create a DB first!")
 
-#Checking if DB exists
-def check_db(db_name):
-	if os.path.isfile(db_name):
-		print ("DB is created")
-		db_flag = True
-		return True
-	else:
-		return False	
-	
+
 	
 	
 	
