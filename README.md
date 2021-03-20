@@ -1,2 +1,2 @@
-# python_projects
- my py projects
+# Python_projects
+Python porjects and exercises
